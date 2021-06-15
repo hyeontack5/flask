@@ -4,10 +4,16 @@ from flask import Flask
 # pybo.py라는 모듈이 실행되면 __name__ 변수에 'pybo' 문자열이 담긴다.
 app = Flask(__name__)
 
+# create_app 함수가 애플리케이션 팩토리다.
 
-@app.route('/')
-def hello_pybo():
-    return 'Hello, Pybo!'
+
+def create_app():
+    app = Flask(__name__)
+
+    @app.route('/')
+    def hello_pybo():
+        return 'Hello, Pybo!'
+    return app
 
 
 if __name__ == '__main__':
