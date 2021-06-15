@@ -25,7 +25,8 @@ ENV FLASK_APP=pybo
 # 아래의 경우 개발 환경(development)으로 실행한다.
 ENV FLASK_ENV=development
 
+WORKDIR /app/pybo
 
 ENTRYPOINT ["python3"]
 
-CMD ["pybo.py"]
+CMD ["__init__.py"]
