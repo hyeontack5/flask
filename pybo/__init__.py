@@ -1,25 +1,22 @@
 from flask import Flask
-# app = Flask(__name__)은 플라스크 애플리케이션을 생성하는 코드이다.
-# __name__이라는 변수에는 모듈이 담긴다.
-# pybo.py라는 모듈이 실행되면 __name__ 변수에 'pybo' 문자열이 담긴다.
-app = Flask(__name__)
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
+import config
 
+db = SQLAlchemy()
+migrate = Migrate()
 
-@app.route('/')
-def hello_pybo():
-    return 'Hello, Pybo!'
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(config)
 
-# create_app 함수가 애플리케이션 팩토리다.
-# def create_app():
-#     app = Flask(__name__)
+    # ORM
+    db.init_app(app)
+    migrate.init_app(app, db)
 
-#     @app.route('/')
-#     def hello_pybo():
-#         return 'Hello, Pybo!'
-#     return app
+    # 블루프린트
+    from .views import main_views
+    app.register_blueprint(main_views.bp)
 
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    return app

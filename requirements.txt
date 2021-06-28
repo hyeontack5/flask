@@ -1,1 +1,3 @@
 Flask
+Flask-Migrate
+# SQLAlchemy==1.3.23

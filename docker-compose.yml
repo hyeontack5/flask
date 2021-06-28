@@ -7,3 +7,9 @@ services:
       - "5000:5000"
     volumes:
       - .:/app
+    environment: 
+      - FLASK_APP=pybo
+      - FLASK_ENV=development
+    command:
+      flask run --host=0.0.0.0
+      # - flask db init
