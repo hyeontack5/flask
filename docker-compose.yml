@@ -11,5 +11,5 @@ services:
       - FLASK_APP=pybo
       - FLASK_ENV=development
     command:
-      bash -c "flask run --host=0.0.0.0 && flask db init"
+      bash -c "flask db init && flask run --host=0.0.0.0"
     restart: always
