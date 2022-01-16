@@ -11,6 +11,12 @@
                     <div>{{ question.create_date|datetime }}</div>
                 </div>
             </div>
+            {% if g.user == question.user %}
+            <div class="my-3">
+                <a href="{{ url_for('question.modify', question_id=question.id) }}"
+                   class="btn btn-sm btn-outline-secondary">수정</a>
+            </div>
+            {% endif %}
         </div>
     </div>
     <h5 class="border-bottom my-3 py-2">{{ question.answer_set|length }}개의 답변이 있습니다.</h5>
@@ -37,7 +43,8 @@
         {% endfor %}
         <!-- 오류표시 End -->
         <div class="form-group">
-            <textarea {% if not g.user %}disabled{% endif %} name="content" id="content" class="form-control" rows="10"></textarea>
+            <textarea {% if not g.user %}disabled{% endif %} name="content" id="content" class="form-control"
+                      rows="10"></textarea>
         </div>
         <input type="submit" value="답변등록" class="btn btn-primary">
     </form>
